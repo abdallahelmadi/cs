@@ -43,9 +43,7 @@ class Program
 					Console.ResetColor();
 				}
 				else
-				{
 					Console.WriteLine("   " + menuOfOptions[index]);
-				}
 				index++;
 			}
 
@@ -69,45 +67,25 @@ class Program
 			{
 				// select correct function depand from the select option
 				if (optionSelected == 0)
-				{
 					additionFunction();
-				}
 				else if (optionSelected == 1)
-				{
 					subtractionFunction();
-				}
 				else if (optionSelected == 2)
-				{
 					multiplicationFunction();
-				}
 				else if (optionSelected == 3)
-				{
 					divisionFunction();
-				}
 				else if (optionSelected == 4)
-				{
 					powerFunction();
-				}
 				else if (optionSelected == 5)
-				{
 					combinationFunction();
-				}
 				else if (optionSelected == 6)
-				{
 					permutationFunction();
-				}
 				else if (optionSelected == 7)
-				{
 					factorialFunction();
-				}
 				else if (optionSelected == 8)
-				{
 					writtenNumberFunction();
-				}
 				else if (optionSelected == 9)
-				{
 					exitFunction();
-				}
 
 				// break the while after user select option
 				break ;
@@ -173,26 +151,73 @@ class Program
 	static void combinationFunction()
 	{
 		Console.Write("Please enter first number: ");
-		int num1 = int.Parse(Console.ReadLine());
+		int n = int.Parse(Console.ReadLine());
 		Console.Write("Please enter second number: ");
-		int num2 = int.Parse(Console.ReadLine());
+		int r = int.Parse(Console.ReadLine());
 
 		// calcule combination result
-		int result = 0;
+		int result = 1;
+		int index = 1;
+		if (r > n - r)
+			r = n - r;
+		while (index <= r)
+		{
+			result = result * (n - r + index) / index;
+			index++;
+		}
 
 		Console.WriteLine($"Reslut is {result}");
 	}
 
 	static void permutationFunction()
-	{}
+	{
+		Console.Write("Please enter first number: ");
+		int n = int.Parse(Console.ReadLine());
+		Console.Write("Please enter second number: ");
+		int r = int.Parse(Console.ReadLine());
+
+		// calcule permutation result
+		int result = 1;
+		int index = 0;
+		while (index < r)
+		{
+			result = result * (n - index);
+			index++;
+		}
+
+		Console.WriteLine($"Result is {result}");
+	}
 
 	static void factorialFunction()
-	{}
+	{
+		Console.Write("Please enter a number: ");
+		int n = int.Parse(Console.ReadLine());
+
+		// calcule factorial result
+		int result = 1;
+		int index = 2;
+		while (index <= n)
+		{
+			result = result * index;
+			index++;
+		}
+
+		Console.WriteLine($"Result is {result}");
+	}
 
 	static void writtenNumberFunction()
-	{}
+	{
+		Console.Write("Please enter a number: ");
+		int n = int.Parse(Console.ReadLine());
+
+		// logic
+
+		Console.WriteLine("Result is ");
+	}
 
 	static void exitFunction()
-	{}
+	{
+		Console.WriteLine("Exit");
+	}
 
 }
