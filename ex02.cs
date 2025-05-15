@@ -2,62 +2,197 @@ using System;
 
 class Program
 {
-    static string[] menuItems = {
-        "Addition",
-        "Subtraction",
-        "Multiplication",
-        "Division",
-        "Power",
-        "Combination",
-        "Permutation",
-        "Factorial",
-        "Written Number",
-        "Exit"
-    };
+	// the main function
+	static void Main()
+	{
+		// the menu options decalre as array of strings
+		string[] menuOfOptions = {
+			"Addition",
+			"Subtraction",
+			"Multiplication",
+			"Division",
+			"Power",
+			"Combination",
+			"Permutation",
+			"Factorial",
+			"Written Number",
+			"Exit"
+		};
 
-    static void Main()
-    {
-        int selectedIndex = 0;
+		// the option seleted in the menu by user
+		int optionSelected = 0;
+		
+		// the variable hold the key pressed
+		ConsoleKey key;
+		
+		while (true)
+		{
+			// clear terminal & print welcome
+			Console.Clear();
+			Console.WriteLine("WELCOME TO MY PROGRAM");
+			Console.WriteLine("=====================");
 
-        ConsoleKey key;
+			// printf the list
+			int index = 0;
+			while (menuOfOptions.Length > index)
+			{
+				if (optionSelected == index)
+				{
+					Console.ForegroundColor = ConsoleColor.Green;
+					Console.WriteLine("=> " + menuOfOptions[index]);
+					Console.ResetColor();
+				}
+				else
+				{
+					Console.WriteLine("   " + menuOfOptions[index]);
+				}
+				index++;
+			}
 
-        do
-        {
-            Console.Clear();
-            Console.WriteLine("WELCOME TO MY PROGRAM\n");
+			// get the key pressed
+			key = Console.ReadKey(true).Key;
 
-            for (int i = 0; i < menuItems.Length; i++)
-            {
-                if (i == selectedIndex)
-                {
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine("=> " + menuItems[i]);
-                    Console.ResetColor();
-                }
-                else
-                {
-                    Console.WriteLine("   " + menuItems[i]);
-                }
-            }
+			// set value of option select if user press UP/DOWN botton
+			if (key == ConsoleKey.UpArrow)
+			{
+				optionSelected--;
+				if (optionSelected == -1)
+					optionSelected = 9;
+			}
+			else if (key == ConsoleKey.DownArrow)
+			{
+				optionSelected++;
+				if (optionSelected == 10)
+					optionSelected = 0;
+			}
+			else if (key == ConsoleKey.Enter) 
+			{
+				// select correct function depand from the select option
+				if (optionSelected == 0)
+				{
+					additionFunction();
+				}
+				else if (optionSelected == 1)
+				{
+					subtractionFunction();
+				}
+				else if (optionSelected == 2)
+				{
+					multiplicationFunction();
+				}
+				else if (optionSelected == 3)
+				{
+					divisionFunction();
+				}
+				else if (optionSelected == 4)
+				{
+					powerFunction();
+				}
+				else if (optionSelected == 5)
+				{
+					combinationFunction();
+				}
+				else if (optionSelected == 6)
+				{
+					permutationFunction();
+				}
+				else if (optionSelected == 7)
+				{
+					factorialFunction();
+				}
+				else if (optionSelected == 8)
+				{
+					writtenNumberFunction();
+				}
+				else if (optionSelected == 9)
+				{
+					exitFunction();
+				}
 
-            key = Console.ReadKey(true).Key;
+				// break the while after user select option
+				break ;
+			}
+		}
+	}
 
-            if (key == ConsoleKey.UpArrow)
-            {
-                selectedIndex--;
-                if (selectedIndex < 0)
-                    selectedIndex = menuItems.Length - 1;
-            }
-            else if (key == ConsoleKey.DownArrow)
-            {
-                selectedIndex++;
-                if (selectedIndex >= menuItems.Length)
-                    selectedIndex = 0;
-            }
+	static void additionFunction()
+	{
+		Console.Write("Please enter first number: ");
+		int num1 = int.Parse(Console.ReadLine());
+		Console.Write("Please enter second number: ");
+		int num2 = int.Parse(Console.ReadLine());
+		Console.WriteLine($"Result is {num1 + num2}");
+	}
 
-        } while (key != ConsoleKey.Enter);
+	static void subtractionFunction()
+	{
+		Console.Write("Please enter first number: ");
+		int num1 = int.Parse(Console.ReadLine());
+		Console.Write("Please enter second number: ");
+		int num2 = int.Parse(Console.ReadLine());
+		Console.WriteLine($"Result is {num1 - num2}");
+	}
 
-        Console.Clear();
-        Console.WriteLine($"You selected: {menuItems[selectedIndex]}");
-    }
+	static void multiplicationFunction()
+	{
+		Console.Write("Please enter first number: ");
+		int num1 = int.Parse(Console.ReadLine());
+		Console.Write("Please enter second number: ");
+		int num2 = int.Parse(Console.ReadLine());
+		Console.WriteLine($"Result is {num1 * num2}");
+	}
+
+	static void divisionFunction()
+	{
+		Console.Write("Please enter first number: ");
+		int num1 = int.Parse(Console.ReadLine());
+		Console.Write("Please enter second number: ");
+		int num2 = int.Parse(Console.ReadLine());
+		Console.WriteLine($"Result is {num1 / num2}");
+	}
+
+	static void powerFunction()
+	{
+		Console.Write("Please enter first number: ");
+		int num1 = int.Parse(Console.ReadLine());
+		Console.Write("Please enter second number: ");
+		int num2 = int.Parse(Console.ReadLine());
+
+		// calcule power result
+		int result = 1;
+		int index = 0;
+		while (index < num2)
+		{
+			result = result * num1; 
+			index++;
+		}
+
+		Console.WriteLine($"Result is {result}");
+	}
+
+	static void combinationFunction()
+	{
+		Console.Write("Please enter first number: ");
+		int num1 = int.Parse(Console.ReadLine());
+		Console.Write("Please enter second number: ");
+		int num2 = int.Parse(Console.ReadLine());
+
+		// calcule combination result
+		int result = 0;
+
+		Console.WriteLine($"Reslut is {result}");
+	}
+
+	static void permutationFunction()
+	{}
+
+	static void factorialFunction()
+	{}
+
+	static void writtenNumberFunction()
+	{}
+
+	static void exitFunction()
+	{}
+
 }
