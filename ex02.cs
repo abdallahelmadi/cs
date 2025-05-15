@@ -211,52 +211,58 @@ class Program
 		int n = int.Parse(Console.ReadLine());
 
 		// logic
+
 		string[] unitsMap = { "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten",
                           "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen" };
     string[] tensMap = { "zero", "ten", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety" };
 
     string words = "";
 
-    if (num >= 1_000_000_000)
-    {
-        words += numberToWordsFunction(num / 1_000_000_000) + " billion ";
-        num %= 1_000_000_000;
-    }
+    int[] divisors = { 1_000_000_000, 1_000_000, 1_000, 100 };
+    string[] names = { "billion", "million", "thousand", "hundred" };
 
-    if (num >= 1_000_000)
+    for (int i = 0; i < divisors.Length; i++)
     {
-        words += numberToWordsFunction(num / 1_000_000) + " million ";
-        num %= 1_000_000;
-    }
-
-    if (num >= 1_000)
-    {
-        words += numberToWordsFunction(num / 1_000) + " thousand ";
-        num %= 1_000;
-    }
-
-    if (num >= 100)
-    {
-        words += numberToWordsFunction(num / 100) + " hundred ";
-        num %= 100;
-    }
-
-    if (num > 0)
-    {
-        if (words != "")
-            words += "";
-
-        if (num < 20)
-            words += unitsMap[num];
-        else
+        int div = divisors[i];
+        if (num >= div)
         {
-            words += tensMap[num / 10];
-            if ((num % 10) > 0)
-                words += " " + unitsMap[num % 10];
+            int part = num / div;
+            num %= div;
+
+            if (part >= 100)
+            {
+                words += unitsMap[part / 100] + " hundred ";
+                part %= 100;
+            }
+
+            if (part >= 20)
+            {
+                words += tensMap[part / 10];
+                part %= 10;
+                if (part > 0) words += " " + unitsMap[part];
+                words += " ";
+            }
+            else if (part > 0)
+            {
+                words += unitsMap[part] + " ";
+            }
+
+            words += names[i] + " ";
         }
     }
 
-		Console.WriteLine("Result is " + words.Trim());
+    if (num >= 20)
+    {
+        words += tensMap[num / 10];
+        num %= 10;
+        if (num > 0) words += " " + unitsMap[num];
+    }
+    else if (num > 0)
+    {
+        words += unitsMap[num];
+    }
+
+    Console.WriteLine(words.Trim());
 	}
 
 	static void exitFunction()
