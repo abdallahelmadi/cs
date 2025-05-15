@@ -211,8 +211,52 @@ class Program
 		int n = int.Parse(Console.ReadLine());
 
 		// logic
+		string[] unitsMap = { "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten",
+                          "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen" };
+    string[] tensMap = { "zero", "ten", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety" };
 
-		Console.WriteLine("Result is ");
+    string words = "";
+
+    if (num >= 1_000_000_000)
+    {
+        words += numberToWordsFunction(num / 1_000_000_000) + " billion ";
+        num %= 1_000_000_000;
+    }
+
+    if (num >= 1_000_000)
+    {
+        words += numberToWordsFunction(num / 1_000_000) + " million ";
+        num %= 1_000_000;
+    }
+
+    if (num >= 1_000)
+    {
+        words += numberToWordsFunction(num / 1_000) + " thousand ";
+        num %= 1_000;
+    }
+
+    if (num >= 100)
+    {
+        words += numberToWordsFunction(num / 100) + " hundred ";
+        num %= 100;
+    }
+
+    if (num > 0)
+    {
+        if (words != "")
+            words += "";
+
+        if (num < 20)
+            words += unitsMap[num];
+        else
+        {
+            words += tensMap[num / 10];
+            if ((num % 10) > 0)
+                words += " " + unitsMap[num % 10];
+        }
+    }
+
+		Console.WriteLine("Result is " + words.Trim());
 	}
 
 	static void exitFunction()
